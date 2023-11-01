@@ -245,6 +245,9 @@ function cta.OnStep(dtime) -- Central logic proccessor.
 		end
 		if cta.DelayToCapture <= 0 then
 			annouce.winner(winner_team, " has gained a area!")
+			for name in pairs(bs.team[winner_team].players) do
+				bank.player_add_value(name, 15)
+			end
 			core.set_node(cta.current_area.pos, {name="air"})
 			local res = cta.get_any_area()
 			if not res then -- Restart round
