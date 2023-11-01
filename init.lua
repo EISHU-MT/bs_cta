@@ -242,6 +242,9 @@ function cta.OnStep(dtime) -- Central logic proccessor.
 			end
 		else
 			cta.DelayToCapture = 10
+			for _, team in pairs({"red", "green", "blue", "yellow"}) do
+				hb.change_hudbar(Player(p), "cta", math.floor(cta.DelayToCapture), 10, "blank.png")
+			end
 		end
 		if cta.DelayToCapture <= 0 then
 			annouce.winner(winner_team, " has gained a area!")
