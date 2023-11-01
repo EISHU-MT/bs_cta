@@ -232,18 +232,26 @@ function cta.OnStep(dtime) -- Central logic proccessor.
 			for _, team in pairs({"red", "green", "blue", "yellow"}) do
 				if team == winner_team then
 					for i, p in pairs(bs.get_team_players(team)) do
-						hb.change_hudbar(Player(p), "cta", math.floor(cta.DelayToCapture), 10, "blank.png")
+						if Player(p):is_player() then
+							hb.change_hudbar(Player(p), "cta", math.floor(cta.DelayToCapture), 10, "blank.png")
+						end
 					end
 				else
 					for i, p in pairs(bs.get_team_players(team)) do
-						hb.change_hudbar(Player(p), "cta", math.floor(cta.DelayToCapture), 10, nil, nil, nil, nil, bs.get_team_color(winner_team, "number"))
+						if Player(p):is_player() then
+							hb.change_hudbar(Player(p), "cta", math.floor(cta.DelayToCapture), 10, nil, nil, nil, nil, bs.get_team_color(winner_team, "number"))
+						end
 					end
 				end
 			end
 		else
 			cta.DelayToCapture = 10
 			for _, team in pairs({"red", "green", "blue", "yellow"}) do
-				hb.change_hudbar(Player(p), "cta", math.floor(cta.DelayToCapture), 10, "blank.png")
+				for i, p in pairs(bs.get_team_players(team)) do
+					if Player(p):is_player() then
+						hb.change_hudbar(Player(p), "cta", math.floor(cta.DelayToCapture), 10, "blank.png")
+					end
+				end
 			end
 		end
 		if cta.DelayToCapture <= 0 then
